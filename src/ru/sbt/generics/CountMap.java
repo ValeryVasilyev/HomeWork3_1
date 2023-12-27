@@ -1,36 +1,21 @@
 package ru.sbt.generics;
 
-import java.util.List;
 import java.util.Map;
 
-public interface CountMap {
-    void add(Object o);
+public interface CountMap<K, V> {
 
-    int getCount(Object o);
+    default void add(K k){
+    }
 
-    //current count
-    int remove(Object o);
+    default int getCount(K k){return 0;}
+
+    int remove(K k);
 
     int size();
 
-    void addAll(CountMap source);
-
-    Map toMap();
+    void addAll(CountMap<K, V> source);
 
     void toMap(Map destination);
 
-    public static void main(String[] args) {
-        CountMap map = null;
-
-        map.add(10);
-        map.add(10);
-        map.add(5);
-        map.add(6);
-        map.add(5);
-        map.add(10);
-/*
-        int count = map.getCout(5); // 2
-        int count = map.getCout(6); // 1
-        int count = map.getCout(10); // 3*/
-    }
+    Map<K, V> toMap();
 }
